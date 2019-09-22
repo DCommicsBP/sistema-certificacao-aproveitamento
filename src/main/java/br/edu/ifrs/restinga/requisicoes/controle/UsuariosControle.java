@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author jader
  */
+
 @RestController
-@RequestMapping(path = "/api/servidores")
-public class Servidores {
+@RequestMapping(path = "/api/usuarios")
+public class UsuariosControle {
     
 }
