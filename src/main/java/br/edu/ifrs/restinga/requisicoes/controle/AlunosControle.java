@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "/api/alunos")
-public class Alunos {
+public class AlunosControle {
 
     @Autowired
     AlunoDAO alunoDAO;
@@ -69,6 +69,7 @@ public class Alunos {
     @ResponseStatus(HttpStatus.OK)
     public Aluno editar(@PathVariable int matricula, @RequestBody Aluno alunoNovo) {
         alunoNovo.setMatricula(0);
+        
         Aluno alunoAntigo = this.pesquisarPeloMatricula(matricula);
         alunoAntigo.setEmail(alunoNovo.getEmail());
         alunoAntigo.setDataIngresso(alunoNovo.getDataIngresso());

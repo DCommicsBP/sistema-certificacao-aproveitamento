@@ -5,9 +5,10 @@
  */
 package br.edu.ifrs.restinga.requisicoes.modelo;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  *

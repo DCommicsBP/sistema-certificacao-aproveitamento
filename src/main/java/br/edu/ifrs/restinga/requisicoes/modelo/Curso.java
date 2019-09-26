@@ -36,11 +36,38 @@ public class Curso {
         this.nome = nome;
     }
 
+    /**
+     * @return
+     */
     public Long getID() {
         return id;
     }
 
-    public void setID(Long id) {
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
+
+	public List<Requisicao> getRequisicoes() {
+		return requisicoes;
+	}
+
+	public void setRequisicoes(List<Requisicao> requisicoes) {
+		this.requisicoes = requisicoes;
+	}
+
+	public void setID(Long id) {
         this.id = id;
     }
 
