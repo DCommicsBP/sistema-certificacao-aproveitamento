@@ -25,12 +25,22 @@ public class Requisicao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Date data;
-    private String professor;
     private String parecer;
     private boolean deferido;
 
     @ManyToMany
     private List<Usuario> usuarios;
+    
+    @ManyToMany
+    private List<Disciplina> diciplinas;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Date getData() {
         return data;
@@ -38,14 +48,6 @@ public class Requisicao {
 
     public void setData(Date data) {
         this.data = data;
-    }
-
-    public String getProfessor() {
-        return professor;
-    }
-
-    public void setProfessor(String professor) {
-        this.professor = professor;
     }
 
     public String getParecer() {
@@ -64,12 +66,21 @@ public class Requisicao {
         this.deferido = deferido;
     }
 
-    public Long getID() {
-        return id;
+    public List<Usuario> getUsuarios() {
+        return usuarios;
     }
 
-    public void setID(Long id) {
-        this.id = id;
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
+    public List<Disciplina> getDiciplinas() {
+        return diciplinas;
+    }
+
+    public void setDiciplinas(List<Disciplina> diciplinas) {
+        this.diciplinas = diciplinas;
+    }
+
+   
 }
