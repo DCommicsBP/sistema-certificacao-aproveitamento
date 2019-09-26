@@ -20,7 +20,10 @@ public class RequisicaoAproveitamenro extends Requisicao{
     private  String analiseProfessor;
     @JsonProperty("tipo")
     @Transient
+<<<<<<< HEAD:src/main/java/br/edu/ifrs/restinga/requisicoes/modelo/RequisicaoAproveitamenro.java
 
+=======
+>>>>>>> daione-sprint01:src/main/java/br/edu/ifrs/restinga/requisicoes/modelo/RequisicaoAproveitamento.java
     private final String tipo = "aproveitamento";
 
     public String getDisciplinasCursadasAnterior() {

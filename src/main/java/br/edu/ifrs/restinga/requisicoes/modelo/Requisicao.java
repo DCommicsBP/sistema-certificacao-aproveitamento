@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package br.edu.ifrs.restinga.requisicoes.modelo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,9 +15,17 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo")
-public class Requisicao {
+@Inheritance(strategy = InheritanceType.JOINED)
+//Configurando herança
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "tipo")
+//define o tipo raiz
+@JsonTypeName("requisicao")
+//tem que definir as subclasses conhecidas
+@JsonSubTypes({
+    @JsonSubTypes.Type(name = "aproveitamento", value = RequisicaoAproveitamento.class),
+        @JsonSubTypes.Type(name = "certificacao", value = RequisicaoCertificacao.class)})
+public abstract class Requisicao implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,9 +36,17 @@ public class Requisicao {
    
     private String parecer;
     private boolean deferido;
+    private byte[] anexos;
+    @OneToMany
+    private List<Disciplina> disciplinaSolicitada;
 
-    @ManyToMany
-    private List<Usuario> usuarios;
+       public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @ManyToMany
     private List<Disciplina> diciplinas;
@@ -48,6 +59,7 @@ public class Requisicao {
         this.id = id;
     }
 
+<<<<<<< HEAD
     public Date getData() {
         return data;
     }
@@ -56,6 +68,8 @@ public class Requisicao {
         this.data = data;
     }
 
+=======
+>>>>>>> daione-sprint01
     public String getParecer() {
         return parecer;
     }
@@ -72,6 +86,7 @@ public class Requisicao {
         this.deferido = deferido;
     }
 
+<<<<<<< HEAD
     public List<Usuario> getUsuarios() {
         return usuarios;
     }
@@ -86,6 +101,26 @@ public class Requisicao {
 
     public void setDiciplinas(List<Disciplina> diciplinas) {
         this.diciplinas = diciplinas;
+=======
+    public byte[] getAnexos() {
+        return anexos;
     }
+
+    public void setAnexos(byte[] anexos) {
+        this.anexos = anexos;
+    }
+
+
+
+    public List<Disciplina> getDisciplinaSolicitada() {
+        return disciplinaSolicitada;
+    }
+
+    public void setDisciplinaSolicitada(List<Disciplina> disciplinaSolicitada) {
+        this.disciplinaSolicitada = disciplinaSolicitada;
+>>>>>>> daione-sprint01
+    }
+
+
 
 }

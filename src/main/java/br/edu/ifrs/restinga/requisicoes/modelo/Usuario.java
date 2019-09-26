@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.edu.ifrs.restinga.requisicoes.modelo;
 
 import javax.persistence.Entity;
@@ -17,8 +12,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -29,10 +27,10 @@ import javax.persistence.ManyToMany;
 @JsonTypeName("usuario")
 //tem que definir as subclasses conhecidas
 @JsonSubTypes({
-    @JsonSubTypes.Type(name = "aluno", value = Aluno.class)
-    ,
-@JsonSubTypes.Type(name = "servidor", value = Servidor.class)})
-public abstract class Usuario {
+    @JsonSubTypes.Type(name = "aluno", value = Aluno.class),
+    @JsonSubTypes.Type(name = "servidor", value = Servidor.class),
+        @JsonSubTypes.Type(name = "professor", value = Professor.class)})
+public abstract class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,14 +41,23 @@ public abstract class Usuario {
     private String email;
     private String permissoes;
     private boolean ativo;
+    @OneToMany
+    private List<Requisicao> requisicoes; 
 
+    public List<Requisicao> getRequisicoes() {
+        return requisicoes;
+    }
+
+    public void setRequisicoes(List<Requisicao> requisicoes) {
+        this.requisicoes = requisicoes;
+    }
+    
     @JsonProperty("tipo")
     @Transient
     private final String tipo = "usuario";
+    
 
-    @ManyToMany
-    private List<Requisicao> requisicoes;
-
+  
     public String getNome() {
         return nome;
     }
@@ -104,6 +111,14 @@ public abstract class Usuario {
     }
 
     public void setID(Long id) {
+        this.id = id;
+    }
+
+     public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
         this.id = id;
     }
 
