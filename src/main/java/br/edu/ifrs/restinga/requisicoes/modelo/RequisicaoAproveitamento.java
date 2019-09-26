@@ -21,7 +21,7 @@ public class RequisicaoAproveitamenro extends Requisicao{
     private  String analiseProfessor;
     @JsonProperty("tipo")
     @Transient
-    private final String tipo = "aptoveitamento";
+    private final String tipo = "aproveitamento";
 
     public String getDisciplinasCursadasAnterior() {
         return disciplinasCursadasAnterior;
