@@ -5,7 +5,6 @@
  */
 package br.edu.ifrs.restinga.requisicoes.controle;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,10 +35,7 @@ public class RequisicoesControle {
 		return new ResponseEntity<Iterable<Requisicao>>(r, HttpStatus.OK);
 			
 	}
-	
-	
-	// Certificacao
-	
+			
 	public RequisicaoCertificacao insereCertificacao(RequisicaoCertificacao c) {
 		return null; 
 		
@@ -48,4 +44,12 @@ public class RequisicoesControle {
     public void atualizaRequisicao () {
     	
     }
+    
+//     @RequestMapping(path = "/pesquisar/tipo/", method = RequestMethod.GET)
+//    public Iterable<Requisicao> pesquisaPorTipo(
+//            @RequestParam String contem) {
+//        return rDao.findByTipoContaining(contem);
+//    }
+
+    
 }

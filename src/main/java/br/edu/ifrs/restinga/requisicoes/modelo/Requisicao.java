@@ -5,6 +5,7 @@
  */
 package br.edu.ifrs.restinga.requisicoes.modelo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.DiscriminatorColumn;
@@ -15,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -24,13 +27,16 @@ public class Requisicao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    @Temporal(TemporalType.DATE)
     private Date data;
+   
     private String parecer;
     private boolean deferido;
 
     @ManyToMany
     private List<Usuario> usuarios;
-    
+
     @ManyToMany
     private List<Disciplina> diciplinas;
 
@@ -82,5 +88,4 @@ public class Requisicao {
         this.diciplinas = diciplinas;
     }
 
-   
 }

@@ -25,18 +25,26 @@ public class AlunosControle {
     @Autowired
     AlunoDAO alunoDAO;
 
-    @RequestMapping(path = "/", method = RequestMethod.GET)
-    @ResponseStatus(HttpStatus.OK)
-    public Iterable<Aluno> listar() {
-        return alunoDAO.findAll();
+//    @RequestMapping(path = "/", method = RequestMethod.GET)
+//    @ResponseStatus(HttpStatus.OK)
+//    public Iterable<Aluno> listar() {
+//        return alunoDAO.findAll();
+//
+//    }
 
-    }
+    /**
+     *
+     * @param aluno
+     * @return
+     */
 
     @RequestMapping(path = "/", method = RequestMethod.POST)
     public Aluno inserir(@RequestBody Aluno aluno) {
+        
         return alunoDAO.save(aluno);
-
     }
+
+    
 
     @RequestMapping(path = "/{matricula}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
