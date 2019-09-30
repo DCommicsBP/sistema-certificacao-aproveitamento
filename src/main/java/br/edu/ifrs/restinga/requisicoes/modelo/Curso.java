@@ -29,9 +29,7 @@ public class Curso {
         this.nome = nome;
     }
 
-    /**
-     * @return
-     */
+   
     public Long getID() {
         return id;
     }
@@ -52,14 +50,7 @@ public class Curso {
 		this.disciplinas = disciplinas;
 	}
 
-	public List<Requisicao> getRequisicoes() {
-		return requisicoes;
-	}
-
-	public void setRequisicoes(List<Requisicao> requisicoes) {
-		this.requisicoes = requisicoes;
-	}
-
+	
 	public void setID(Long id) {
         this.id = id;
     }

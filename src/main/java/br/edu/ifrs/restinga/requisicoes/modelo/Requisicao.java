@@ -2,6 +2,10 @@
 package br.edu.ifrs.restinga.requisicoes.modelo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -11,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -23,7 +28,7 @@ import javax.persistence.TemporalType;
 @JsonTypeName("requisicao")
 //tem que definir as subclasses conhecidas
 @JsonSubTypes({
-    @JsonSubTypes.Type(name = "aproveitamento", value = RequisicaoAproveitamento.class),
+    @JsonSubTypes.Type(name = "aproveitamento", value = RequisicaoAproveitamenro.class),
         @JsonSubTypes.Type(name = "certificacao", value = RequisicaoCertificacao.class)})
 public abstract class Requisicao implements Serializable {
 
@@ -51,15 +56,7 @@ public abstract class Requisicao implements Serializable {
     @ManyToMany
     private List<Disciplina> diciplinas;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-<<<<<<< HEAD
+  
     public Date getData() {
         return data;
     }
@@ -68,8 +65,6 @@ public abstract class Requisicao implements Serializable {
         this.data = data;
     }
 
-=======
->>>>>>> daione-sprint01
     public String getParecer() {
         return parecer;
     }
@@ -86,26 +81,15 @@ public abstract class Requisicao implements Serializable {
         this.deferido = deferido;
     }
 
-<<<<<<< HEAD
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
-
+ 
     public List<Disciplina> getDiciplinas() {
         return diciplinas;
     }
 
     public void setDiciplinas(List<Disciplina> diciplinas) {
         this.diciplinas = diciplinas;
-=======
-    public byte[] getAnexos() {
-        return anexos;
+        
     }
-
     public void setAnexos(byte[] anexos) {
         this.anexos = anexos;
     }
@@ -118,7 +102,6 @@ public abstract class Requisicao implements Serializable {
 
     public void setDisciplinaSolicitada(List<Disciplina> disciplinaSolicitada) {
         this.disciplinaSolicitada = disciplinaSolicitada;
->>>>>>> daione-sprint01
     }
 
 
