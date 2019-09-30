@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import br.edu.ifrs.restinga.requisicoes.dao.RequisicaoDAO;
 import br.edu.ifrs.restinga.requisicoes.modelo.Requisicao;
 import br.edu.ifrs.restinga.requisicoes.modelo.RequisicaoCertificacao;
+import javax.validation.constraints.Positive.List;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  *
@@ -44,12 +46,6 @@ public class RequisicoesControle {
     public void atualizaRequisicao () {
     	
     }
-    
-//     @RequestMapping(path = "/pesquisar/tipo/", method = RequestMethod.GET)
-//    public Iterable<Requisicao> pesquisaPorTipo(
-//            @RequestParam String contem) {
-//        return rDao.findByTipoContaining(contem);
-//    }
 
     
 }
