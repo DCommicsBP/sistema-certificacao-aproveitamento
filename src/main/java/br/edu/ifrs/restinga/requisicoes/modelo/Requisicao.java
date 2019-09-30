@@ -2,6 +2,7 @@
 package br.edu.ifrs.restinga.requisicoes.modelo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -18,6 +19,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -31,6 +33,9 @@ import javax.persistence.TemporalType;
     @JsonSubTypes.Type(name = "aproveitamento", value = RequisicaoAproveitamenro.class),
         @JsonSubTypes.Type(name = "certificacao", value = RequisicaoCertificacao.class)})
 public abstract class Requisicao implements Serializable {
+    @Transient
+    @JsonProperty("tipo")
+    private final String tipo ="requisicao";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

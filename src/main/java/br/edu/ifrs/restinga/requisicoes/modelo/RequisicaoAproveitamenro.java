@@ -15,12 +15,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 @Entity
 public class RequisicaoAproveitamenro extends Requisicao{
-    
-    private  String disciplinasCursadasAnterior;
-    private  String analiseProfessor;
     @JsonProperty("tipo")
     @Transient
     private final String tipo = "aproveitamento";
+    
+    private  String disciplinasCursadasAnterior;
+    private  String analiseProfessor;
+
 
     public String getDisciplinasCursadasAnterior() {
         return disciplinasCursadasAnterior;

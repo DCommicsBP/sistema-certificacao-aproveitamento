@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ifrs.restinga.requisicoes.dao.RequisicaoDAO;
 import br.edu.ifrs.restinga.requisicoes.modelo.Requisicao;
-import br.edu.ifrs.restinga.requisicoes.modelo.RequisicaoCertificacao;
-import javax.validation.constraints.Positive.List;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  *
@@ -25,21 +24,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 
 @RestController
-@RequestMapping(path = "/api/requisisoes")
+@RequestMapping(path = "/api")
 public class RequisicoesControle {
 	
 	@Autowired
 	RequisicaoDAO rDao; 
 		
-	@GetMapping
+	@GetMapping(path = "/requisicoes/")
 	public ResponseEntity<?> listarRequisicao(){
 		Iterable<Requisicao> r = rDao.findAll(); 
 		return new ResponseEntity<Iterable<Requisicao>>(r, HttpStatus.OK);
 			
 	}
-			
-	public RequisicaoCertificacao insereCertificacao(RequisicaoCertificacao c) {
-		return null; 
+	
+        @PostMapping(path = "/requisicoes")
+	public Requisicao insere(@RequestBody Requisicao c) {
+            
+		return rDao.save(c); 
 		
 	}
 	
