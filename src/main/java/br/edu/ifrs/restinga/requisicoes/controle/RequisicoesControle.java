@@ -5,6 +5,8 @@
  */
 package br.edu.ifrs.restinga.requisicoes.controle;
 
+import br.edu.ifrs.restinga.requisicoes.dao.RequisicaoAproveitamentoDAO;
+import br.edu.ifrs.restinga.requisicoes.dao.RequisicaoCertificacaoDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ifrs.restinga.requisicoes.dao.RequisicaoDAO;
 import br.edu.ifrs.restinga.requisicoes.modelo.Requisicao;
-import org.springframework.web.bind.annotation.PathVariable;
+import br.edu.ifrs.restinga.requisicoes.modelo.RequisicaoAproveitamento;
+import br.edu.ifrs.restinga.requisicoes.modelo.RequisicaoCertificacao;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import org.apache.logging.log4j.util.PropertySource;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,35 +38,46 @@ public class RequisicoesControle {
 
     @Autowired
     RequisicaoDAO rDao;
+    
+    @Autowired
+    RequisicaoCertificacaoDAO requisicaoCertificacaoDAO;
+    
+    @Autowired
+    RequisicaoAproveitamentoDAO requisicaoAproveitamentoDAO;
+    
 
     @GetMapping(path = "/requisicoes/")
-    public ResponseEntity<?> listarRequisicao() {
-        Iterable<Requisicao> r = rDao.findAll();
-        return new ResponseEntity<Iterable<Requisicao>>(r, HttpStatus.OK);
-
+    @ResponseStatus(HttpStatus.OK)
+    public ArrayList<Requisicao> listarRequisicao() {
+        ArrayList<Requisicao> requisicoes = new ArrayList<>();
+        Iterable<RequisicaoAproveitamento> apro = requisicaoAproveitamentoDAO.findAll();
+        Iterable<RequisicaoCertificacao> cert = requisicaoCertificacaoDAO.findAll();
+        apro.forEach((aproveitamento) -> {
+            requisicoes.add(aproveitamento);
+        });
+        cert.forEach((certificacao) -> {
+            requisicoes.add(certificacao);
+        });
+        requisicoes.sort(Comparator.comparing(Requisicao::getId));
+        return requisicoes;
     }
 
     @PostMapping(path = "/requisicoes/")
     public Requisicao insere(@RequestBody Requisicao c) {
-
         return rDao.save(c);
 
     }
-//
-//        @RequestMapping(path = "/nome/{nome}", method = RequestMethod.GET)
-//    @ResponseStatus(HttpStatus.OK)
-//    public Iterable<Funcionario> buscarPeloNome(@PathVariable("nome") String nome) {
-//        return funcionarioDAO.findByNome(nome);
-//    }
-//        @RequestMapping(path = "/pesquisar/andar/", method = RequestMethod.GET)
-//    public Iterable<Vaga> pesquisaPorAndar(@RequestParam int inicia) {
-//        return vagaDAO.findByAndarStartingWith(inicia);
-//
-//    }
 
-    @RequestMapping(path = "parecer/", method = RequestMethod.GET)
-    public Iterable<Requisicao> listarTipo(@RequestParam String parecer) {
-        return rDao.findByParecer(parecer);
+
+    @GetMapping("/requisicoes/certificacao/")
+    public Iterable<RequisicaoCertificacao> listarCertificacao() {
+        return requisicaoCertificacaoDAO.findAll();
     }
-
+    
+    @GetMapping("/requisicoes/aproveitamento/")
+    public Iterable<RequisicaoAproveitamento> listarAproveitamento() {
+        return requisicaoAproveitamentoDAO.findAll();
+    }
+    
+    
 }

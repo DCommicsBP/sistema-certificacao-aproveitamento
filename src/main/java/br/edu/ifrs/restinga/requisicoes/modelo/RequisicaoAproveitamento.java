@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author jader
  */
 @Entity
-public class RequisicaoAproveitamenro extends Requisicao{
+public class RequisicaoAproveitamento extends Requisicao{
     @JsonProperty("tipo")
     @Transient
     private final String tipo = "aproveitamento";
@@ -37,6 +37,10 @@ public class RequisicaoAproveitamenro extends Requisicao{
 
     public void setAnaliseProfessor(String analiseProfessor) {
         this.analiseProfessor = analiseProfessor;
+    }
+
+    public String getTipo() {
+        return tipo;
     }
 
    

@@ -39,6 +39,11 @@ public class RequisicaoCertificacao extends Requisicao{
     public void setCriterioAvaliacao(String criterioAvaliacao) {
         this.criterioAvaliacao = criterioAvaliacao;
     }
+
+    public String getTipo() {
+        return tipo;
+    }
+    
     
     
 }

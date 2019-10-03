@@ -29,14 +29,14 @@ import javax.persistence.Transient;
 @JsonTypeName("requisicao")
 //tem que definir as subclasses conhecidas
 @JsonSubTypes({
-    @JsonSubTypes.Type(name = "aproveitamento", value = RequisicaoAproveitamenro.class)
+    @JsonSubTypes.Type(name = "aproveitamento", value = RequisicaoAproveitamento.class)
     ,
         @JsonSubTypes.Type(name = "certificacao", value = RequisicaoCertificacao.class)})
 public abstract class Requisicao implements Serializable {
 
     @Transient
     @JsonProperty("tipo")
-    private final String tipo = "requisicao";
+    private  String tipo = "requisicao";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

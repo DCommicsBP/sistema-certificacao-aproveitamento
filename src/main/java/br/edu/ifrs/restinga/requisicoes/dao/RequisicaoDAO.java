@@ -12,7 +12,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RequisicaoDAO extends JpaRepository<Requisicao, Integer> {
-
-    public Iterable<Requisicao> findByParecer(String parecer);
     
 }
