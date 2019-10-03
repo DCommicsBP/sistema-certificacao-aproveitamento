@@ -1,4 +1,3 @@
-
 package br.edu.ifrs.restinga.requisicoes.modelo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -30,12 +29,14 @@ import javax.persistence.Transient;
 @JsonTypeName("requisicao")
 //tem que definir as subclasses conhecidas
 @JsonSubTypes({
-    @JsonSubTypes.Type(name = "aproveitamento", value = RequisicaoAproveitamenro.class),
+    @JsonSubTypes.Type(name = "aproveitamento", value = RequisicaoAproveitamenro.class)
+    ,
         @JsonSubTypes.Type(name = "certificacao", value = RequisicaoCertificacao.class)})
 public abstract class Requisicao implements Serializable {
+
     @Transient
     @JsonProperty("tipo")
-    private final String tipo ="requisicao";
+    private final String tipo = "requisicao";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,14 +44,14 @@ public abstract class Requisicao implements Serializable {
     @JsonFormat(pattern = "dd/MM/yyyy")
     @Temporal(TemporalType.DATE)
     private Date data;
-   
+
     private String parecer;
     private boolean deferido;
     private byte[] anexos;
     @OneToMany
     private List<Disciplina> disciplinaSolicitada;
 
-       public Long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -61,7 +62,6 @@ public abstract class Requisicao implements Serializable {
     @ManyToMany
     private List<Disciplina> diciplinas;
 
-  
     public Date getData() {
         return data;
     }
@@ -86,20 +86,18 @@ public abstract class Requisicao implements Serializable {
         this.deferido = deferido;
     }
 
- 
     public List<Disciplina> getDiciplinas() {
         return diciplinas;
     }
 
     public void setDiciplinas(List<Disciplina> diciplinas) {
         this.diciplinas = diciplinas;
-        
+
     }
+
     public void setAnexos(byte[] anexos) {
         this.anexos = anexos;
     }
-
-
 
     public List<Disciplina> getDisciplinaSolicitada() {
         return disciplinaSolicitada;
@@ -108,7 +106,5 @@ public abstract class Requisicao implements Serializable {
     public void setDisciplinaSolicitada(List<Disciplina> disciplinaSolicitada) {
         this.disciplinaSolicitada = disciplinaSolicitada;
     }
-
-
 
 }
