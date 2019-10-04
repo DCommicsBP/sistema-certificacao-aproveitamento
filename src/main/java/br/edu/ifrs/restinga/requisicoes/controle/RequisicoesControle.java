@@ -9,23 +9,19 @@ import br.edu.ifrs.restinga.requisicoes.dao.RequisicaoAproveitamentoDAO;
 import br.edu.ifrs.restinga.requisicoes.dao.RequisicaoCertificacaoDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ifrs.restinga.requisicoes.dao.RequisicaoDAO;
+import br.edu.ifrs.restinga.requisicoes.erros.RequisicaoInvalida;
 import br.edu.ifrs.restinga.requisicoes.modelo.Requisicao;
 import br.edu.ifrs.restinga.requisicoes.modelo.RequisicaoAproveitamento;
 import br.edu.ifrs.restinga.requisicoes.modelo.RequisicaoCertificacao;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
-import org.apache.logging.log4j.util.PropertySource;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
@@ -63,6 +59,7 @@ public class RequisicoesControle {
     }
 
     @PostMapping(path = "/requisicoes/")
+    @ResponseStatus(HttpStatus.CREATED)
     public Requisicao insere(@RequestBody Requisicao c) {
         return rDao.save(c);
 
@@ -70,11 +67,13 @@ public class RequisicoesControle {
 
 
     @GetMapping("/requisicoes/certificacao/")
+    @ResponseStatus(HttpStatus.OK)
     public Iterable<RequisicaoCertificacao> listarCertificacao() {
         return requisicaoCertificacaoDAO.findAll();
     }
     
     @GetMapping("/requisicoes/aproveitamento/")
+    @ResponseStatus(HttpStatus.OK)
     public Iterable<RequisicaoAproveitamento> listarAproveitamento() {
         return requisicaoAproveitamentoDAO.findAll();
     }
