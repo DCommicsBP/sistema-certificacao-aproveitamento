@@ -20,6 +20,11 @@ import br.edu.ifrs.restinga.requisicoes.modelo.RequisicaoAproveitamento;
 import br.edu.ifrs.restinga.requisicoes.modelo.RequisicaoCertificacao;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.Optional;
+import javafx.scene.chart.PieChart;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -34,13 +39,12 @@ public class RequisicoesControle {
 
     @Autowired
     RequisicaoDAO rDao;
-    
+
     @Autowired
     RequisicaoCertificacaoDAO requisicaoCertificacaoDAO;
-    
+
     @Autowired
     RequisicaoAproveitamentoDAO requisicaoAproveitamentoDAO;
-    
 
     @GetMapping(path = "/requisicoes/")
     @ResponseStatus(HttpStatus.OK)
@@ -65,18 +69,28 @@ public class RequisicoesControle {
 
     }
 
-
     @GetMapping("/requisicoes/certificacao/")
     @ResponseStatus(HttpStatus.OK)
     public Iterable<RequisicaoCertificacao> listarCertificacao() {
         return requisicaoCertificacaoDAO.findAll();
     }
-    
+
     @GetMapping("/requisicoes/aproveitamento/")
     @ResponseStatus(HttpStatus.OK)
     public Iterable<RequisicaoAproveitamento> listarAproveitamento() {
         return requisicaoAproveitamentoDAO.findAll();
     }
-    
-    
+
+    @GetMapping("/requisicoes/aproveitamento/{id}/")
+    @ResponseStatus(HttpStatus.OK)
+    public Iterable<RequisicaoAproveitamento> listarAproveitamentoID(@PathVariable long id) {
+        return requisicaoAproveitamentoDAO.findById(id);
+    }
+    @GetMapping("/requisicoes/certificacao/{id}/")
+    @ResponseStatus(HttpStatus.OK)
+    public Iterable<RequisicaoCertificacao> listarCertificacaoID(@PathVariable long id) {
+        return requisicaoCertificacaoDAO.findById(id);
+    }
+        
+
 }

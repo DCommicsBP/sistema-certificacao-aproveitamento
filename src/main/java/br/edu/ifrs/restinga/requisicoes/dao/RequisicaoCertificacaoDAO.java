@@ -15,5 +15,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface RequisicaoCertificacaoDAO extends CrudRepository<RequisicaoCertificacao, Integer>{
-    
+
+    public Iterable<RequisicaoCertificacao> findById(long id);
+
 }
